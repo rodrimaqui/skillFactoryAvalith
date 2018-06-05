@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'CarController@showAddPage');
+Route::post('/', 'CarController@saveCar');
+
+Route::get('show','CarController@show');
+
+Route::get('/delete/{id}', 'CarController@delete');
+
+Route::get('/edit/{id}', 'CarController@showEdit');
+Route::post('/edit', 'CarController@edit');

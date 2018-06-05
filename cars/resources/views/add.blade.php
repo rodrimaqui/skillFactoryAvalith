@@ -1,20 +1,20 @@
 @extends('master')
 @section('title','Add Car')
 @section('container')
-<form>
+<form method="post" action="{{url('/')}}">
     {!!csrf_field()!!}
-    <input type='text' id='brand' placeholder='Brand'/>
+    <input type='text' class="form-control" id='brand' name='brand' placeholder='Brand'/>
     <br/>
-    <input type='text' id='model' placeholder='Model'/>
+    <input type='text' class="form-control" id='model' name='model' placeholder='Model'/>
     <br/>
-    <input type='text' id='doors' placeholder='Doors'/>
+    <input type='number' class="form-control" id='doors' name='doors' placeholder='Doors'/>
     <br/>
-    <input type='text' id='color' placeholder='Color'/>
+    <input type='text' class="form-control" id='color' name='color' placeholder='Color'/>
     <br/>
-    <input type='text' id='kms' placeholder='Kms'/>
+    <input type='number' class="form-control" id='kms' name='kms' placeholder='Kms'/>
     <br/>
-    <input type='text' id='state' placeholder='State'/>
+    <input type='text' class="form-control" id='state' name='state' placeholder='State'/>
     <br/>
-    <button id='button'>Send</button>    
+    <button type="submit" class="btn btn-primary" id='button'>Send</button>    
 </form>
 @endSection
