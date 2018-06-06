@@ -15,10 +15,10 @@
         </header>
         <div class='conteiner'>
             <div class='row'>
-                <div class='col-4'>
+                <div class='col-2'>
 
                 </div>
-                <div class="col-4">
+                <div class="col-6">
                     @yield('container')
                 </div>
                 <div class="col-4">
