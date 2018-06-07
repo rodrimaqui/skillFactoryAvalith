@@ -9,7 +9,12 @@
     <br/>
     <input type='number' class="form-control" id='doors' name='doors' placeholder='Doors'/>
     <br/>
-    <input type='text' class="form-control" id='color' name='color' placeholder='Color'/>
+    {{-- <input type='text' class="form-control" id='color' name='color' placeholder='Color'/> --}}
+    <select class='form-control' name='color'>
+        @foreach($colors as $color)
+            <option value='{{$color->id}}'>{{$color->name}}</option>
+        @endforeach
+    </select>
     <br/>
     <input type='number' class="form-control" id='kms' name='kms' placeholder='Kms'/>
     <br/>

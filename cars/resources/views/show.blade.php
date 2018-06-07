@@ -21,7 +21,7 @@
             <td>{{$one->brand}}</td>
             <td>{{$one->model}}</td>
             <td>{{$one->doors}}</td>
-            <td>{{$one->color}}</td>
+            <td>{{$one->color->name}}</td>
             <td>{{$one->kms}}</td>
             <td>{{$one->state}}</td>
             <td><a href="edit/{{$one->id}}">Edit</a></td>

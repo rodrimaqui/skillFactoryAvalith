@@ -18,10 +18,12 @@ class CarsMigration extends Migration
             $table->string('brand',30);
             $table->string('model',30);
             $table->integer('doors');
-            $table->string('color',30);
             $table->integer('kms');
             $table->string('state',30);
+            $table->integer('color_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('color_id')->references('id')->on('colors');
         });
     }
 

@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Car;
+use App\Color;
 
 class CarController extends Controller
 {
     //
     public function showAddPage(){
-        return view('add');
+
+        $colors = DB::table('colors')->select('*')->get();
+
+        return view('add',compact('colors'));
     }
 
     public function saveCar(Request $req){
@@ -21,28 +25,30 @@ class CarController extends Controller
             'brand' => $req->brand,
             'model' => $req->model,
             'doors' => $req->doors,
-            'color' => $req->color,
+            'color_id' => $req->color,
             'kms'   => $req->kms,
             'state' => $req->state,
         ]);
 
         $car->save();
 
-        $carArray = DB::table('cars')->select('*')->get();
+        $carArray = Car::all();
 
         return view('show',compact('carArray'));
     }
 
     public function show(){
-        $carArray = DB::table('cars')->select('*')->get();
+
+        $carArray = Car::all();
 
         return view('show',compact('carArray'));
     }
 
     public function showEdit($id){
-        $car = DB::table('cars')->find($id);
+        $car = Car::findOrFail($id);
+        $colors = DB::table('colors')->select('*')->get();
 
-        return view('edit',compact('car'));
+        return view('edit',compact('car','colors'));
     }
 
     public function edit(Request $req){
@@ -51,12 +57,12 @@ class CarController extends Controller
             'brand' => $req->brand,
             'model' => $req->model,
             'doors' => $req->doors,
-            'color' => $req->color,
+            'color_id' => $req->color,
             'kms'   => $req->kms,
             'state' => $req->state,
         ]);
 
-        $carArray = DB::table('cars')->select('*')->get();
+        $carArray = Car::all();
 
         return view('show',compact('carArray'));
     }
@@ -65,7 +71,7 @@ class CarController extends Controller
         
         $oneCar = DB::table('cars')->where('id',$id)->delete();;
 
-        $carArray = DB::table('cars')->select('*')->get();
+        $carArray = Car::all();
 
         return view('show',compact('carArray'));
     }
