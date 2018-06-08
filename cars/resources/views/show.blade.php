@@ -24,8 +24,12 @@
             <td>{{$one->color->name}}</td>
             <td>{{$one->kms}}</td>
             <td>{{$one->state}}</td>
-            <td><a href="edit/{{$one->id}}">Edit</a></td>
-            <td><a href="delete/{{$one->id}}">Delete</a></td>
+            {{-- <td><a href="cars/".{{$one->id}}."/edit">Edit</a></td> --}}
+            <td><a href="{{url('/cars/'.$one->id.'/edit')}}">Edit</a></td>
+            <form action="{{url('/cars/'.$one->id)}}" method="post">
+                <input name="_method" type='hidden' value='delete'/>
+            <td><a href="/cars/{{$one->id}}">Delete</a></td>
+          </form>
         </tr>
         @endforeach
     </tbody>

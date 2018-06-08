@@ -2,8 +2,9 @@
 @section('title','edit')
 @section('container')
     @if($car)
-    <form method="post" action="{{url('/edit')}}">
+    <form method="post" action="{{url('/cars/'.$car->id)}}">
         {!!csrf_field()!!}
+        <input name="_method" type='hidden' value='PUT'/>
         <input type="hidden" value={{$car->id}} name='id'/>
         <input type='text' class="form-control" id='brand' value={{$car->brand}} name='brand' placeholder='Brand'/>
         <br/>

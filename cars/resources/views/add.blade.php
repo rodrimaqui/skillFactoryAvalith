@@ -1,7 +1,7 @@
 @extends('master')
 @section('title','Add Car')
 @section('container')
-<form method="post" action="{{url('/')}}">
+<form method="post" action="{{url('/cars')}}">
     {!!csrf_field()!!}
     <input type='text' class="form-control" id='brand' name='brand' placeholder='Brand'/>
     <br/>

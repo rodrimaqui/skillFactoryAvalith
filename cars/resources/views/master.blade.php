@@ -8,8 +8,8 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a class="navbar-brand" href="#">Rodri</a>
                   <div class="navbar-nav">
-                  <a class="nav-item nav-link" href="{{url('/show')}}">Show</a>
-                  <a class="nav-item nav-link" href="{{url('/')}}">Add</a>
+                  <a class="nav-item nav-link" href="{{url('/cars/')}}">Show</a>
+                  <a class="nav-item nav-link" href="{{url('/cars/create')}}">Add</a>
                   </div>
             </nav>
         </header>
