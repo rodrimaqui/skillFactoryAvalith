@@ -58,10 +58,7 @@ class CarsController extends Controller
 
         $car->save();
 
-        $carArray = Car::all();
-
-        // return view('show',compact('carArray'));
-        return redirect()->route('/cars/');
+        return redirect('cars');
     }
 
     /**
@@ -73,6 +70,10 @@ class CarsController extends Controller
     public function show($id)
     {
         //
+
+        $car = Car::findOrFail($id);
+
+        return response()->json($car);
     }
 
     /**
@@ -110,9 +111,6 @@ class CarsController extends Controller
             'state' => $req->state,
         ]);
 
-        $carArray = Car::all();
-
-        // return view('show',compact('carArray'));
         return redirect('/cars/');
     }
 
@@ -126,8 +124,6 @@ class CarsController extends Controller
     {
         //
         $oneCar = DB::table('cars')->where('id',$id)->delete();;
-
-        $carArray = Car::all();
 
         return redirect('/cars/');
     }

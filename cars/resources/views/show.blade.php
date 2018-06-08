@@ -25,11 +25,19 @@
             <td>{{$one->kms}}</td>
             <td>{{$one->state}}</td>
             {{-- <td><a href="cars/".{{$one->id}}."/edit">Edit</a></td> --}}
-            <td><a href="{{url('/cars/'.$one->id.'/edit')}}">Edit</a></td>
-            <form action="{{url('/cars/'.$one->id)}}" method="post">
-                <input name="_method" type='hidden' value='delete'/>
-            <td><a href="/cars/{{$one->id}}">Delete</a></td>
-          </form>
+
+            <form action="{{url('/cars/'.$one->id.'/edit')}}" method="GET">
+              {!!csrf_field()!!}
+              <td><button type='submit' class="btn btn-primary">Edit</button></td>
+            </form>
+
+            {{-- <td><a href="{{url('/cars/'.$one->id.'/edit')}}">Edit</a></td> --}}
+            
+            <form action="{{url('/cars/'.$one->id)}}" method="POST">
+              {!!csrf_field()!!}
+              <input name="_method" type='hidden' value='DELETE'/>
+              <td><button type='submit' class="btn btn-primary">Delete</button></td>
+            </form>
         </tr>
         @endforeach
     </tbody>

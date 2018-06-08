@@ -11,16 +11,6 @@
 |
 */
 
-// Route::get('/', 'CarController@showAddPage');
-// Route::post('/', 'CarController@saveCar');
-
-// Route::get('/show','CarController@show');
-
-// Route::get('/delete/{id}', 'CarController@delete');
-
-// Route::get('/edit/{id}', 'CarController@showEdit');
-// Route::post('/edit', 'CarController@edit');
-
 Route::resource('cars','CarsController');
 
 Route::get('/apiCars','CarsController@indexApi');
