@@ -16,9 +16,11 @@ class CarsController extends Controller
      */
     public function index()
     {
-        // 
-        $carArray = Car::all();
+        //
+        $car = new Car;
 
+        $carArray = $car->allCars();
+        
         return view('show',compact('carArray'));
     }
 
@@ -30,7 +32,9 @@ class CarsController extends Controller
     public function create()
     {
         //
-        $colors = DB::table('colors')->select('*')->get();
+        $color = new Color;
+
+        $colors = $color->allColors();
 
         return view('add',compact('colors'));
     }
@@ -86,8 +90,11 @@ class CarsController extends Controller
     {
         //
 
-        $car = Car::findOrFail($id);
-        $colors = DB::table('colors')->select('*')->get();
+        $carO = new Car;
+        $color = new Color;
+
+        $car = $carO->oneCar($id);
+        $colors = $color->allColors();
 
          return view('edit',compact('car','colors'));
     }
@@ -102,14 +109,9 @@ class CarsController extends Controller
     public function update(Request $req, $id)
     {
         //
-        DB::table('cars')->where('id',$req->id)->update([
-            'brand' => $req->brand,
-            'model' => $req->model,
-            'doors' => $req->doors,
-            'color_id' => $req->color,
-            'kms'   => $req->kms,
-            'state' => $req->state,
-        ]);
+        $car = new Car;
+
+        $car->updateCar($req,$id);
 
         return redirect('/cars/');
     }
@@ -123,7 +125,9 @@ class CarsController extends Controller
     public function destroy($id)
     {
         //
-        $oneCar = DB::table('cars')->where('id',$id)->delete();;
+        $car = new Car;
+
+        $car->removeCar($id);
 
         return redirect('/cars/');
     }
@@ -131,16 +135,16 @@ class CarsController extends Controller
     /* APIS  */
 
     public function indexApi(){
-        
-        $carArray = Car::all();
 
-        return  response()->json($carArray);
+        $car = new Car;
+
+        return  response()->json($car->allCars());
     }
 
     public function showApi($id){
 
-        $car = Car::findOrFail($id);
+        $car = new Car;
 
-        return response()->json($car);
+        return response()->json($car->oneCar($id));
     }
 }
