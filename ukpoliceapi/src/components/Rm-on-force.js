@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import {Card,CardTitle,CardBody,CardSubtitle,CardText,CardLink,CardImg} from 'reactstrap';
 
+import RmSpinner from './Rm-spinner.js';
+
 class RmOnForce extends Component{
 
     constructor(props){
@@ -10,7 +12,8 @@ class RmOnForce extends Component{
 
         this.state = {
             id : this.props.match.params.id,
-            force : {}
+            force : {},
+            spinner : true
         }
     }
 
@@ -19,7 +22,8 @@ class RmOnForce extends Component{
         axios.get('https://data.police.uk/api/forces/'+this.state.id)
         .then((response)=>{            
             this.setState({
-                force : response.data
+                force : response.data,
+                spinner : false
             });
             console.log(this.state.force);
         })
@@ -31,17 +35,21 @@ class RmOnForce extends Component{
 
         return(
             <div>
-               <Card body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
-                    <CardBody>
-                        <CardTitle>{this.state.force.name}</CardTitle>
-                        <CardSubtitle>Telephone: {this.state.force.telephone}</CardSubtitle>
-                    </CardBody>                
-                    <CardBody>
-                    <CardImg bottom width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-                        <CardText>{this.state.force.description}</CardText>
-                        <CardLink href={this.state.force.url}>Police Page</CardLink>
-                    </CardBody>
-                </Card>
+                { this.state.spinner ? <RmSpinner/> :
+                    <div>
+                        <Card body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
+                                <CardBody>
+                                    <CardTitle>{this.state.force.name}</CardTitle>
+                                    <CardSubtitle>Telephone: {this.state.force.telephone}</CardSubtitle>
+                                </CardBody>                
+                                <CardBody>
+                                <CardImg bottom width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+                                    <CardText>{this.state.force.description}</CardText>
+                                    <CardLink href={this.state.force.url}>Police Page</CardLink>
+                                </CardBody>
+                        </Card>
+                    </div>
+               }
             </div>
 
         );

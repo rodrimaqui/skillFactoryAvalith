@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import {FormGroup,Label,Input,Button} from 'reactstrap';
 
+import RmSpinner from './Rm-spinner';
+
 class RmCrime extends Component{
 
     constructor(){
@@ -14,7 +16,8 @@ class RmCrime extends Component{
             force : [],
             arrayCrime : [],
             inputCrime : '',
-            inputForce : ''
+            inputForce : '',
+            spinner : true
         }
 
         this.handleChangeSearchCrimeAndForce = this.handleChangeSearchCrimeAndForce.bind(this);
@@ -31,7 +34,8 @@ class RmCrime extends Component{
                     crime : crimeResponse.data,
                     force : forcesResponse.data,
                     inputCrime : '',
-                    inputForce : ''
+                    inputForce : '',
+                    spinner : false
                     });
             }))
             .catch((e) => {
@@ -40,11 +44,13 @@ class RmCrime extends Component{
         }
 
     searchCrime(){ 
-        
-        console.log(`https://data.police.uk/api/crimes-no-location?category=${this.state.inputCrime}&force=${this.state.inputForce}`)
+        this.setState({spinner : true})
       axios.get(`https://data.police.uk/api/crimes-no-location?category=${this.state.inputCrime}&force=${this.state.inputForce}`)
-          .then((response)=> {
-              console.log(response.data);
+          .then((response)=> {              
+              this.setState({                  
+                  arrayCrime : response.data,
+                  spinner : false
+              });
           })
           .catch((e)=> {
               console.log(e);
@@ -54,14 +60,12 @@ class RmCrime extends Component{
     /* HANDLER*/
     handleChangeSearchCrimeAndForce(e){
         if(e.target.id === 'crimeSelect'){
-            console.log('entra crimen');
             this.setState({
                 inputCrime : String(e.target.value)
             });
 
         }else
             if(e.target.id === 'forceSelect'){
-                console.log('entra fuerza');
                 this.setState({
                     inputForce : String(e.target.value)
                 });
@@ -79,28 +83,31 @@ class RmCrime extends Component{
         this.searchCrimeAndForce();
 
     }
+
     render(){
         return(
             <div>
-                <FormGroup>
-                    <Label for="crimeSelect">CRIME</Label>
-                    <Input type="select" name="crimeSelect" id="crimeSelect" onChange={this.handleChangeSearchCrimeAndForce}>
-                        {this.state.crime.map((e,key)=>
-                            <option value={e.url} key={key}>{e.name}</option>
-                        )}
-                    </Input>
-                </FormGroup>
-                <br/>
-                <FormGroup>
-                    <Label for="forceSelect">FORCE</Label>
-                    <Input type="select" name="forceSelect" id="forceSelect" onChange={this.handleChangeSearchCrimeAndForce}>
-                        {this.state.force.map((e,key)=>
-                            <option value={e.id} key={key}>{e.name}</option>
-                        )}
-                    </Input>
-                </FormGroup>
-                <br/>
-                <Button color="info" id='btnSearch' onClick={this.handleSearchCrime} >Search Crime</Button>
+                {this.state.spinner ? <RmSpinner/> : 
+                    <div>
+                        <FormGroup>
+                            <Label for="crimeSelect">CRIME</Label>
+                            <Input type="select" name="crimeSelect" id="crimeSelect" onChange={this.handleChangeSearchCrimeAndForce}>
+                                {this.state.crime.map((e,key)=>
+                                    <option value={e.url} key={key}>{e.name}</option>
+                                )}
+                            </Input>
+                        
+                            <Label for="forceSelect">FORCE</Label>
+                            <Input type="select" name="forceSelect" id="forceSelect" onChange={this.handleChangeSearchCrimeAndForce}>
+                                {this.state.force.map((e,key)=>
+                                    <option value={e.id} key={key}>{e.name}</option>
+                                )}
+                            </Input>
+                        </FormGroup>
+                        
+                            <Button color="info" id='btnSearch' onClick={this.handleSearchCrime} >Search Crime</Button>
+                    </div>
+                }  
             </div>
         );
     }
