@@ -3,8 +3,6 @@ import axios from 'axios';
 
 import {Table} from 'reactstrap';
 
-import {NavLink} from 'reactstrap';
-
 import {Link} from 'react-router-dom';
 
 class RmForces extends Component{
@@ -30,7 +28,7 @@ class RmForces extends Component{
     render(){
         return(
             <div>
-           <Table responsive>
+            <Table responsive>
                 <thead>
                     <tr>
                     <th>Name</th>
@@ -41,13 +39,11 @@ class RmForces extends Component{
                         
                         <tr key={key}>
                             <Link to={`/${e.id}`}><td> {e.name}</td> </Link>
-                            {/* <NavLink href={`/forces/${e.id}`}><td> {e.name}</td> </NavLink> */}
                         </tr>   
                         
                     )}                    
                 </tbody>
             </Table>
-
             </div>
         );
     }

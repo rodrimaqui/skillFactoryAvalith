@@ -1,6 +1,8 @@
 import React,{ Component } from 'react';
 import axios from 'axios';
 
+import {Card,CardTitle,CardBody,CardSubtitle,CardText,CardLink,CardImg} from 'reactstrap';
+
 class RmOnForce extends Component{
 
     constructor(props){
@@ -10,7 +12,6 @@ class RmOnForce extends Component{
             id : this.props.match.params.id,
             force : {}
         }
-        console.log(this.props.match.params.id);
     }
 
     componentDidMount(){
@@ -20,6 +21,7 @@ class RmOnForce extends Component{
             this.setState({
                 force : response.data
             });
+            console.log(this.state.force);
         })
         .catch((e)=>{
             console.log(e);
@@ -29,7 +31,17 @@ class RmOnForce extends Component{
 
         return(
             <div>
-                
+               <Card body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
+                    <CardBody>
+                        <CardTitle>{this.state.force.name}</CardTitle>
+                        <CardSubtitle>Telephone: {this.state.force.telephone}</CardSubtitle>
+                    </CardBody>                
+                    <CardBody>
+                    <CardImg bottom width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+                        <CardText>{this.state.force.description}</CardText>
+                        <CardLink href={this.state.force.url}>Police Page</CardLink>
+                    </CardBody>
+                </Card>
             </div>
 
         );

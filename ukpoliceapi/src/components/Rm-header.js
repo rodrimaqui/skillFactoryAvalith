@@ -36,7 +36,7 @@ class RmHeader extends Component{
                                 <NavLink  href="/forces">Forces</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="#">Crime</NavLink>
+                                <NavLink href="/crime">Crime</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink href="#">Neighbourhood</NavLink>
