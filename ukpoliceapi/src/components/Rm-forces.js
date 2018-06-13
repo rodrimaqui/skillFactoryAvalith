@@ -41,12 +41,14 @@ class RmForces extends Component{
                                 </tr>
                             </thead>
                             <tbody>                    
-                                {this.state.forces.map((e,key)=>
-                                    
+                                {this.state.forces.map((e,key)=>                                    
                                     <tr key={key}>
-                                        <Link to={`/${e.id}`}><td> {e.name}</td> </Link>
-                                    </tr>   
-                                    
+                                        <td>
+                                            <Link  to={`/${e.id}`}>
+                                                {e.name}
+                                            </Link>
+                                        </td>
+                                    </tr>  
                                 )}                    
                             </tbody>
                         </Table>

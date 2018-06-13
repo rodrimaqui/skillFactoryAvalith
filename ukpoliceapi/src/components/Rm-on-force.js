@@ -25,7 +25,6 @@ class RmOnForce extends Component{
                 force : response.data,
                 spinner : false
             });
-            console.log(this.state.force);
         })
         .catch((e)=>{
             console.log(e);
