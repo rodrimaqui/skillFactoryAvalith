@@ -83,7 +83,8 @@ class RmStopAndSearch extends Component{
                         </FormGroup>
 
                         <Button color="info" id='btnSearch' onClick={this.handleSearchCrime} >Search Stop</Button>
-
+                        <br/>
+                        <br/>
                         <Table striped>
                             <thead>
                                 <tr>

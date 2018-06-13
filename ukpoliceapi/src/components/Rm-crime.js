@@ -36,8 +36,6 @@ class RmCrime extends Component{
                     crime : crimeResponse.data,
                     force : forcesResponse.data,
                     date : dateResponse.data.date,
-                    inputCrime : '',
-                    inputForce : '',
                     spinner : false
                     });
             }))
@@ -56,7 +54,7 @@ class RmCrime extends Component{
               });
           })
           .catch((e)=> {
-              console.log(e);
+              console.log('asdasd');
           });
     }
 
@@ -90,6 +88,7 @@ class RmCrime extends Component{
     render(){
         return(
             <div>
+                
                 {this.state.spinner ? <RmSpinner/> : 
                     <div>
                         <FormGroup>
@@ -108,29 +107,30 @@ class RmCrime extends Component{
                             </Input>
                         </FormGroup>
                         
-                            <Button color="info" id='btnSearch' onClick={this.handleSearchCrime} >Search Crime</Button>
-
-                            <Table striped>
-                                <thead>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Location</th>
-                                        <th>Month</th>
-                                        <th>Status</th>
+                        <Button color="info" id='btnSearch' onClick={this.handleSearchCrime} >Search Crime</Button>
+                        <br/>
+                        <br/>
+                        <Table striped>
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Location</th>
+                                    <th>Month</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.arrayCrime.map((element,key) =>
+                                    <tr key={key}>
+                                        <td>{element.category}</td>
+                                        <td>{element.location}</td>
+                                        <td>{element.month}</td>
+                                        <td>{element.outcome_status.category}</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {this.state.arrayCrime.map((element,key) =>
-                                        <tr key={key}>
-                                            <td>{element.category}</td>
-                                            <td>{element.location}</td>
-                                            <td>{element.month}</td>
-                                            <td>{element.outcome_status.category}</td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </Table>
-                            <Label>The last updated was the {this.state.date}</Label>
+                                )}
+                            </tbody>
+                        </Table>
+                        <Label>The last updated was the {this.state.date}</Label>
                     </div>
                 }  
             </div>

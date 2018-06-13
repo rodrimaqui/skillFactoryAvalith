@@ -8,6 +8,7 @@ import {
     NavItem,
     NavLink,
      } from 'reactstrap';
+import '../App.css';
 
 class RmHeader extends Component{
 
@@ -27,7 +28,7 @@ class RmHeader extends Component{
     render(){
         return(
             <div>
-                <Navbar color="primary" light expand="md">
+                <Navbar color="dark" dark expand="md">
                     <NavbarBrand href="/">UK Police</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
