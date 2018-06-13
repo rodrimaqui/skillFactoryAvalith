@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 
 import axios from 'axios';
 
-import {FormGroup,Label,Input,Button} from 'reactstrap';
+import {FormGroup,Label,Input,Button,Table} from 'reactstrap';
 
 import RmSpinner from './Rm-spinner';
 
@@ -17,7 +17,8 @@ class RmCrime extends Component{
             arrayCrime : [],
             inputCrime : '',
             inputForce : '',
-            spinner : true
+            spinner : true,
+            date : ''
         }
 
         this.handleChangeSearchCrimeAndForce = this.handleChangeSearchCrimeAndForce.bind(this);
@@ -27,12 +28,14 @@ class RmCrime extends Component{
     searchCrimeAndForce(){
         axios.all([
             axios.get('https://data.police.uk/api/forces'),
-            axios.get('https://data.police.uk/api/crime-categories')
+            axios.get('https://data.police.uk/api/crime-categories'),
+            axios.get('https://data.police.uk/api/crime-last-updated')
             ])
-            .then(axios.spread((forcesResponse,crimeResponse) => {
+            .then(axios.spread((forcesResponse,crimeResponse,dateResponse) => {
                 this.setState({
                     crime : crimeResponse.data,
                     force : forcesResponse.data,
+                    date : dateResponse.data.date,
                     inputCrime : '',
                     inputForce : '',
                     spinner : false
@@ -106,6 +109,28 @@ class RmCrime extends Component{
                         </FormGroup>
                         
                             <Button color="info" id='btnSearch' onClick={this.handleSearchCrime} >Search Crime</Button>
+
+                            <Table striped>
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Location</th>
+                                        <th>Month</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.state.arrayCrime.map((element,key) =>
+                                        <tr key={key}>
+                                            <td>{element.category}</td>
+                                            <td>{element.location}</td>
+                                            <td>{element.month}</td>
+                                            <td>{element.outcome_status.category}</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </Table>
+                            <Label>The last updated was the {this.state.date}</Label>
                     </div>
                 }  
             </div>
