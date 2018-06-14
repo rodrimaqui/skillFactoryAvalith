@@ -1,5 +1,16 @@
+body{
+  background-color: #EDF060;  
+}
+
 .App {
   text-align: center;
-  background-color: #E2DE84;
-  height: 100vh;
+}
+
+.principal{
+  margin-top: 5%;
+}
+
+.letterStyle{
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
 }

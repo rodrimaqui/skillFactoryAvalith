@@ -70,11 +70,11 @@ class RmStopAndSearch extends Component{
     }
     render(){
         return(
-            <div>
+            <div className='principal'>
                 {this.state.spinner ? <RmSpinner/> : 
                     <div>
                          <FormGroup>
-                            <Label for="forceSelect">Force</Label>
+                            <Label for="forceSelect" className='letterStyle'>Force</Label>
                             <Input type="select" name="forceSelect" id="forceSelect" onChange={this.handleChangeSearchForce}>
                                 {this.state.arrayForces.map((e,key)=>
                                     <option value={e.id} key={key}>{e.name}</option>
@@ -85,7 +85,7 @@ class RmStopAndSearch extends Component{
                         <Button color="info" id='btnSearch' onClick={this.handleSearchCrime} >Search Stop</Button>
                         <br/>
                         <br/>
-                        <Table striped>
+                        <Table striped className='letterStyle'>
                             <thead>
                                 <tr>
                                     <th>Age Range</th>

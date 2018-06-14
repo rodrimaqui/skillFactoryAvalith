@@ -31,13 +31,13 @@ class RmForces extends Component{
     }
     render(){
         return(
-            <div>
+            <div className='principal'>
                 {this.state.spinner ? <RmSpinner/> : 
                     <div>
                         <Table responsive>
                             <thead>
                                 <tr>
-                                <th>Name</th>
+                                <th className='letterStyle'>Name</th>
                                 </tr>
                             </thead>
                             <tbody>                    

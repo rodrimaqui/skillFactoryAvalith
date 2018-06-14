@@ -87,19 +87,19 @@ class RmCrime extends Component{
 
     render(){
         return(
-            <div>
+            <div className='principal'>
                 
                 {this.state.spinner ? <RmSpinner/> : 
                     <div>
                         <FormGroup>
-                            <Label for="crimeSelect">CRIME</Label>
+                            <Label for="crimeSelect" className='letterStyle'>CRIME</Label>
                             <Input type="select" name="crimeSelect" id="crimeSelect" onChange={this.handleChangeSearchCrimeAndForce}>
                                 {this.state.crime.map((e,key)=>
                                     <option value={e.url} key={key}>{e.name}</option>
                                 )}
                             </Input>
                         
-                            <Label for="forceSelect">FORCE</Label>
+                            <Label for="forceSelect" className='letterStyle'>FORCE</Label>
                             <Input type="select" name="forceSelect" id="forceSelect" onChange={this.handleChangeSearchCrimeAndForce}>
                                 {this.state.force.map((e,key)=>
                                     <option value={e.id} key={key}>{e.name}</option>
@@ -110,7 +110,7 @@ class RmCrime extends Component{
                         <Button color="info" id='btnSearch' onClick={this.handleSearchCrime} >Search Crime</Button>
                         <br/>
                         <br/>
-                        <Table striped>
+                        <Table striped className='letterStyle'>
                             <thead>
                                 <tr>
                                     <th>Category</th>
@@ -130,8 +130,10 @@ class RmCrime extends Component{
                                 )}
                             </tbody>
                         </Table>
-                        <Label>The last updated was the {this.state.date}</Label>
+                        <Label className='labelCrime'><b>The last updated was in {this.state.date}</b></Label>
                     </div>
+
+                    
                 }  
             </div>
         );
