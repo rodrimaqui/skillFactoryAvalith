@@ -76,6 +76,7 @@ class RmStopAndSearch extends Component{
                          <FormGroup>
                             <Label for="forceSelect" className='letterStyle'>Force</Label>
                             <Input type="select" name="forceSelect" id="forceSelect" onChange={this.handleChangeSearchForce}>
+                                <option value='' selected disabled hidden>Choose one</option>
                                 {this.state.arrayForces.map((e,key)=>
                                     <option value={e.id} key={key}>{e.name}</option>
                                 )}

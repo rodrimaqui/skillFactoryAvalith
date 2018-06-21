@@ -18,7 +18,7 @@ class RmCrime extends Component{
             inputCrime : '',
             inputForce : '',
             spinner : true,
-            date : ''
+            date : '',
         }
 
         this.handleChangeSearchCrimeAndForce = this.handleChangeSearchCrimeAndForce.bind(this);
@@ -52,9 +52,10 @@ class RmCrime extends Component{
                   arrayCrime : response.data,
                   spinner : false
               });
-          })
+              
+            })
           .catch((e)=> {
-              console.log('asdasd');
+              console.log(e);
           });
     }
 
@@ -94,16 +95,20 @@ class RmCrime extends Component{
                         <FormGroup>
                             <Label for="crimeSelect" className='letterStyle'>CRIME</Label>
                             <Input type="select" name="crimeSelect" id="crimeSelect" onChange={this.handleChangeSearchCrimeAndForce}>
+                                <option value='' selected disabled hidden>Choose one</option>
                                 {this.state.crime.map((e,key)=>
                                     <option value={e.url} key={key}>{e.name}</option>
-                                )}
+                                    )
+                                }
                             </Input>
                         
                             <Label for="forceSelect" className='letterStyle'>FORCE</Label>
                             <Input type="select" name="forceSelect" id="forceSelect" onChange={this.handleChangeSearchCrimeAndForce}>
+                                <option value='' selected disabled hidden>Choose one</option>
                                 {this.state.force.map((e,key)=>
                                     <option value={e.id} key={key}>{e.name}</option>
-                                )}
+                                    )
+                                }
                             </Input>
                         </FormGroup>
                         
