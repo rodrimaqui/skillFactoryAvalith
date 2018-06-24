@@ -62,6 +62,7 @@ class StopController extends Controller
                 ]);
 
                 $stop->save();
+                
                 $forces = DB::table('stops')->where('forces','=',$force)->get();
             }
         }else{
