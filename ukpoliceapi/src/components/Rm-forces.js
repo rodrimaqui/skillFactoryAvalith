@@ -19,14 +19,15 @@ class RmForces extends Component{
     }
 
     componentDidMount(){
-        axios.get('https://data.police.uk/api/forces')
+        axios.get('http://127.0.0.1:8000/forces')
         .then((response)=>{
+            console.log(response);
             this.setState({
                 forces : response.data,
                 spinner : false
             });
         }).catch((e)=>{
-            console.log(e);
+            console.log('fallo por: '+e);
         });
     }
     render(){
@@ -44,7 +45,7 @@ class RmForces extends Component{
                                 {this.state.forces.map((e,key)=>                                    
                                     <tr key={key}>
                                         <td>
-                                            <Link  to={`/${e.id}`}>
+                                            <Link  to={`/${e.force_id}`}>
                                                 {e.name}
                                             </Link>
                                         </td>

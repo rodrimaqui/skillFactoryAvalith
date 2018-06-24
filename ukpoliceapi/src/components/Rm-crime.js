@@ -27,8 +27,8 @@ class RmCrime extends Component{
      /* APIS CALLS*/ 
     searchCrimeAndForce(){
         axios.all([
-            axios.get('https://data.police.uk/api/forces'),
-            axios.get('https://data.police.uk/api/crime-categories'),
+            axios.get('http://127.0.0.1:8000/forces'),
+            axios.get('http://127.0.0.1:8000/categoriesCrime'),
             axios.get('https://data.police.uk/api/crime-last-updated')
             ])
             .then(axios.spread((forcesResponse,crimeResponse,dateResponse) => {
@@ -46,7 +46,7 @@ class RmCrime extends Component{
 
     searchCrime(){ 
         this.setState({spinner : true})
-      axios.get(`https://data.police.uk/api/crimes-no-location?category=${this.state.inputCrime}&force=${this.state.inputForce}`)
+        axios.get(`http://127.0.0.1:8000/crimeApi/${this.state.inputForce}/${this.state.inputCrime}`)
           .then((response)=> {              
               this.setState({                  
                   arrayCrime : response.data,
@@ -55,7 +55,7 @@ class RmCrime extends Component{
               
             })
           .catch((e)=> {
-              console.log(e);
+            console.log('fallo por: '+e);
           });
     }
 
@@ -106,7 +106,7 @@ class RmCrime extends Component{
                             <Input type="select" name="forceSelect" id="forceSelect" onChange={this.handleChangeSearchCrimeAndForce}>
                                 <option value='' selected disabled hidden>Choose one</option>
                                 {this.state.force.map((e,key)=>
-                                    <option value={e.id} key={key}>{e.name}</option>
+                                    <option value={e.force_id} key={key}>{e.name}</option>
                                     )
                                 }
                             </Input>
@@ -130,7 +130,7 @@ class RmCrime extends Component{
                                         <td>{element.category}</td>
                                         <td>{element.location}</td>
                                         <td>{element.month}</td>
-                                        <td>{element.outcome_status.category}</td>
+                                        <td>{element.status}</td>
                                     </tr>
                                 )}
                             </tbody>

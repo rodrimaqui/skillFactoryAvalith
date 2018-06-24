@@ -25,7 +25,7 @@ class RmStopAndSearch extends Component{
     
     /* API CALLS */
     searchForces(){
-        axios.get('https://data.police.uk/api/forces')
+        axios.get('http://127.0.0.1:8000/forces')
         .then((response)=>{
             this.setState({
                 arrayForces : response.data,
@@ -38,7 +38,7 @@ class RmStopAndSearch extends Component{
     }
 
     searchStop(){
-        axios.get(`https://data.police.uk/api/stops-force?force=${this.state.force}`)
+        axios.get(`http://127.0.0.1:8000/stop/${this.state.force}`)
         .then((response)=>{
             this.setState({
                 arrayStops : response.data
@@ -78,7 +78,7 @@ class RmStopAndSearch extends Component{
                             <Input type="select" name="forceSelect" id="forceSelect" onChange={this.handleChangeSearchForce}>
                                 <option value='' selected disabled hidden>Choose one</option>
                                 {this.state.arrayForces.map((e,key)=>
-                                    <option value={e.id} key={key}>{e.name}</option>
+                                    <option value={e.force_id} key={key}>{e.name}</option>
                                 )}
                             </Input>
                         </FormGroup>
@@ -101,13 +101,13 @@ class RmStopAndSearch extends Component{
                             <tbody>
                                 {this.state.arrayStops.map((element,key) =>
                                     <tr key={key}>
-                                        <td>{element.age_range}</td>
-                                        <td>{element.self_defined_ethnicity}</td>
+                                        <td>{element.age}</td>
+                                        <td>{element.ethnicity}</td>
                                         <td>{element.gender}</td>
                                         <td>{element.legislation}</td>
                                         <td>{element.datetime}</td>
                                         <td>{element.type }</td>
-                                        <td>{element.object_of_search}</td>
+                                        <td>{element.search}</td>
                                     </tr>
                                 )}
                             </tbody>
