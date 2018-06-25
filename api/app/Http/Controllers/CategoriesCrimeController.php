@@ -39,6 +39,8 @@ class CategoriesCrimeController extends Controller
 
     function getCategoriesCrimeApi(){
 
+        CategoriesCrime::truncate();
+
         $response = $this-> getApi("https://data.police.uk/api/crime-categories");
 
         foreach(json_decode($response) as $aux){

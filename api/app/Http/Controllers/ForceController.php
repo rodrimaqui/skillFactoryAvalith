@@ -41,6 +41,8 @@ class ForceController extends Controller
     //FORCES
     function getForcesApi(){        
         
+        force::truncate();
+        
         $response = $this->getApi("https://data.police.uk/api/forces");
 
         foreach(json_decode($response) as $aux){
